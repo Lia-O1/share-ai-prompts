@@ -1,3 +1,4 @@
+import { Toaster } from "sonner";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import "@styles/globals.css";
@@ -20,6 +21,7 @@ const RootLayout = ({ children }) => {
             {children}
           </main>
         </Provider>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
