@@ -1,0 +1,46 @@
+"use client";
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Profile from "@components/Profile";
+
+const MyProfile = () => {
+  const { data: session } = useSession();
+  const [myPosts, setMyPosts] = useState([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch(`/api/users/${session?.user.id}/posts`);
+      if (!response.ok) {
+        console.error("Failed to fetch posts");
+        setMyPosts([]);
+        return;
+      }
+      const data = await response.json();
+      if (!Array.isArray(data)) {
+        console.error("Server did not return an array");
+        setMyPosts([]);
+        return;
+      }
+      setMyPosts(data);
+    };
+    if (session?.user.id) fetchPosts();
+  }, [session?.user.id]);
+
+  const handleEdit = (post) => {
+    router.push(`/update-prompt?id=${post._id}`);
+  };
+  const handleDelete = (post) => {};
+  return (
+    <Profile
+      name="My"
+      description="Welcome to your profile page"
+      data={myPosts}
+      handleEdit={handleEdit}
+      handleDelete={handleDelete}
+    />
+  );
+};
+
+export default MyProfile;

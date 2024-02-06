@@ -27,12 +27,12 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag{" "}
-            <span className="font-normal">(#webdevelopment, #idea, etc.)</span>
+            <span className="font-normal">(webdevelopment, idea, etc.)</span>
           </span>
           <input
             value={post.tag}
             onChange={(e) => setPost({ ...post, tag: e.target.value })}
-            placeholder="#tag"
+            placeholder="tag"
             required
             className="form_input"
           />
@@ -46,7 +46,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             disabled={submitting}
             className="px-5 py-1.5 text-sm bg-violet-700 t rounded-full text-white"
           >
-            Create
+            {type}
           </button>
         </div>
       </form>

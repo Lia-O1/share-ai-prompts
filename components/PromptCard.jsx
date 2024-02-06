@@ -7,6 +7,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
   const [copied, setCopied] = useState("");
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -50,8 +53,24 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={handleTagClick && handleTagClick(post.tag)}
       >
-        {post.tag}
+        #{post.tag}
       </p>
+      {session?.user.id === post.creator._id && pathName === "/profile" && (
+        <div className="mt-2 flex-between gap-4 border-t border-gray-200 pt-3">
+          <button
+            className="font-inter font-semibold text-sm green_gradient cursor-pointer p-2"
+            onClick={handleEdit}
+          >
+            Edit
+          </button>
+          <button
+            className="font-inter font-semibold text-sm orange_gradient cursor-pointer p-2"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };
