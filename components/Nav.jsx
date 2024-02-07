@@ -81,7 +81,7 @@ const Nav = () => {
                 </Link>
                 <button
                   type="button"
-                  className="mt-5 w-full black_btn"
+                  className="mt-5 w-full black_btn_mobile"
                   onClick={() => {
                     setToggleDropdown(false);
                     signOut();
