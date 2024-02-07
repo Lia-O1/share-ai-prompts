@@ -6,13 +6,13 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       <h1 className="head_text text-left">{type} Post</h1>
       <p className="description text-left max-w-md">
         {type} and share amazing prompts with the world, and let your
-        imagination run wild with any AI-powered platform.
+        imagination run wild with any AI-powered platform
       </p>
       <form
         onSubmit={handleSubmit}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
       >
-        <label>
+        <label htmlFor="prompt">
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Your AI prompt
           </span>
@@ -22,9 +22,11 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             placeholder="Write your post here"
             required
             className="form_textarea"
+            name="prompt"
+            id="prompt"
           />
         </label>
-        <label>
+        <label htmlFor="tag">
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag{" "}
             <span className="font-normal">(webdevelopment, idea, etc.)</span>
@@ -35,6 +37,8 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             placeholder="tag"
             required
             className="form_input"
+            name="tag"
+            id="tag"
           />
         </label>
         <div className="flex-end mx-3 mb-5 gap-4">

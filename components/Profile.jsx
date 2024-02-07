@@ -1,6 +1,13 @@
 import PromptCard from "./PromptCard";
 
-const Profile = ({ name, description, data, handleEdit, handleDelete }) => {
+const Profile = ({
+  name,
+  description,
+  data,
+  handleEdit,
+  handleDelete,
+  pronoun,
+}) => {
   return (
     <section className="w-full">
       <h1 className="head_text text-left">{name} Profile</h1>
@@ -18,7 +25,7 @@ const Profile = ({ name, description, data, handleEdit, handleDelete }) => {
         </div>
       ) : (
         <div className="text-lg text-gray-600 sm:text-xl max-w-2xl mt-10">
-          You haven't created any prompts yet
+          {pronoun} haven't created any posts yet
         </div>
       )}
     </section>

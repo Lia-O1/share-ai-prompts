@@ -58,6 +58,7 @@ const MyProfile = () => {
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
+      pronoun="You"
     />
   );
 };

@@ -6,10 +6,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
+const PromptCard = ({
+  post,
+  handleTagClick,
+  handleProfileClick,
+  handleEdit,
+  handleDelete,
+}) => {
   const { data: session } = useSession();
   const pathName = usePathname();
-  const router = useRouter();
   const [copied, setCopied] = useState("");
   const handleCopy = () => {
     setCopied(post.prompt);
@@ -22,16 +27,26 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-center content-center gap-5">
-        <div className="flex flex-1 justify-start items-center gap-3 cursor-pointer">
+        <div className="flex flex-1 justify-start items-center gap-3">
           <Image
             src={post.creator.image}
             alt="User image"
             width={40}
             height={40}
-            className="rounded-full object-contain"
+            className="rounded-full object-contain cursor-pointer"
+            onClick={() =>
+              handleProfileClick &&
+              handleProfileClick(post.creator._id, post.creator.username)
+            }
           />
           <div className="flex">
-            <h3 className="font-satoshi font-semibold text-gray-900">
+            <h3
+              className="font-satoshi font-semibold text-gray-900 cursor-pointer"
+              onClick={() =>
+                handleProfileClick &&
+                handleProfileClick(post.creator._id, post.creator.username)
+              }
+            >
               {post.creator.username}
             </h3>
           </div>
@@ -43,8 +58,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
                 ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
-            width={15}
-            height={15}
+            width={20}
+            height={20}
+            alt="Copy"
           />
         </div>
       </div>

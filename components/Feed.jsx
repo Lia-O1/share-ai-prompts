@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
+import { useRouter } from "next/navigation";
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const PromptCardList = ({ data, handleTagClick, handleProfileClick }) => {
   return (
     <div className="mt-12 prompt_layout">
       {data.map((post) => (
@@ -11,6 +12,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
+          handleProfileClick={handleProfileClick}
         />
       ))}
     </div>
@@ -21,6 +23,7 @@ const Feed = () => {
   const [searchInput, setSearchInput] = useState("");
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,6 +56,10 @@ const Feed = () => {
     setSearchInput(tag);
   };
 
+  const handleProfileClick = (id, username) => {
+    router.push(`/profile?id=${id}?username=${username}`);
+  };
+
   return (
     <section className="feed">
       <form className="w-full relative flex-center">
@@ -63,10 +70,15 @@ const Feed = () => {
           onChange={(e) => setSearchInput(e.target.value)}
           required
           className="search_input"
+          name="search_input"
         />
       </form>
       {filteredPosts.length > 0 ? (
-        <PromptCardList data={filteredPosts} handleTagClick={handleTagClick} />
+        <PromptCardList
+          data={filteredPosts}
+          handleTagClick={handleTagClick}
+          handleProfileClick={handleProfileClick}
+        />
       ) : (
         <div className="text-lg text-gray-600 sm:text-xl max-w-2xl mt-12">
           No prompts found
