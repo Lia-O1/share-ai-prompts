@@ -6,8 +6,13 @@ import "@styles/globals.css";
 export const metadata = {
   title: "Promptekey",
   description:
-    "Promptekey is a platform that allows you to discover, create and share AI prompts",
-  image: "/assets/images/emeraldhandmade-website.png",
+    "Promptekey is a platform that allows you to discover, create and share AI prompts.",
+  openGraph: {
+    images: "/og-image.png",
+    title: "Promptekey",
+    description:
+      "Promptekey is a platform that allows you to discover, create and share AI prompts.",
+  },
 };
 
 const RootLayout = ({ children }) => {
